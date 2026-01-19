@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import type { GameMode } from '../types';
 
 interface StartScreenProps {
-  onStart: () => void;
+  onStart: (mode: GameMode) => void;
 }
 
 export function StartScreen({ onStart }: StartScreenProps) {
@@ -187,20 +188,48 @@ export function StartScreen({ onStart }: StartScreenProps) {
 
       {/* Section 4: CTA */}
       <section className="min-h-screen flex flex-col items-center justify-center p-6 md:p-12 relative z-10">
-        <div className="text-center max-w-2xl scroll-fade-in-up">
+        <div className="text-center max-w-3xl scroll-fade-in-up">
           <h2 className="text-5xl md:text-7xl font-bold text-accent mb-8 marker-text" style={{ transform: 'rotate(-1deg)' }}>
             Ready to Play?
           </h2>
           <p className="text-2xl md:text-3xl text-sketch mb-12 leading-relaxed">
-            Jump into the game and start making connections!
+            Choose your game mode and start making connections!
           </p>
-          <button
-            onClick={onStart}
-            className="bg-accent text-white font-bold py-6 px-12 md:py-8 md:px-16 text-3xl md:text-4xl active:bg-accent-light transition-all duration-150 marker-text rough-doodle hover:shadow-lg hover:scale-105"
-            style={{ transform: 'rotate(0.5deg)' }}
-          >
-            Start Your Game →
-          </button>
+          
+          {/* Game mode buttons */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* Bingo Mode */}
+            <div className="doodle-border bg-paper p-6" style={{ transform: 'rotate(-0.5deg)' }}>
+              <div className="text-6xl mb-4">🎯</div>
+              <h3 className="text-3xl font-bold text-sketch mb-3 marker-text">Bingo Mode</h3>
+              <p className="text-lg text-sketch mb-6 leading-relaxed">
+                Classic 5×5 grid. Find matches, mark squares, get 5 in a row to win!
+              </p>
+              <button
+                onClick={() => onStart('bingo')}
+                className="w-full bg-accent text-white font-bold py-4 px-8 text-2xl active:bg-accent-light transition-all duration-150 marker-text rough-doodle hover:shadow-lg hover:scale-105"
+                style={{ transform: 'rotate(0.5deg)' }}
+              >
+                Play Bingo →
+              </button>
+            </div>
+
+            {/* Scavenger Hunt Mode */}
+            <div className="doodle-border bg-paper p-6" style={{ transform: 'rotate(0.5deg)' }}>
+              <div className="text-6xl mb-4">📋</div>
+              <h3 className="text-3xl font-bold text-sketch mb-3 marker-text">Scavenger Hunt</h3>
+              <p className="text-lg text-sketch mb-6 leading-relaxed">
+                Check off items from a list. Track your progress and complete them all!
+              </p>
+              <button
+                onClick={() => onStart('scavenger')}
+                className="w-full bg-accent text-white font-bold py-4 px-8 text-2xl active:bg-accent-light transition-all duration-150 marker-text rough-doodle hover:shadow-lg hover:scale-105"
+                style={{ transform: 'rotate(-0.5deg)' }}
+              >
+                Start Hunt →
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
